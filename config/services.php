@@ -35,8 +35,4 @@ return [
     'invites_endpoint' => [
         'user' => env('USER_INVITE_URL', env('APP_URL')),
     ],
-
-    'ekeng' => [
-        'redirect_url' => env('SERVICE_EKENG_REDIRECT_URL', '').'/signin?uuid=',
-    ],
 ];
