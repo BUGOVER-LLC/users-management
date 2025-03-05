@@ -62,6 +62,7 @@ class EditCitizenRequest extends AbstractRequest
     }
 
 
+    #[\Override]
     public function attributes(): array
     {
 

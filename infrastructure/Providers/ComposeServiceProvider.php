@@ -9,6 +9,7 @@ use Illuminate\View\Compilers\BladeCompiler;
 
 class ComposeServiceProvider extends ServiceProvider
 {
+    #[\Override]
     public function register()
     {
         $this->registerBladeExtensions();

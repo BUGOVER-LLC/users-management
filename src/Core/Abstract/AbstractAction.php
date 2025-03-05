@@ -21,8 +21,6 @@ abstract class AbstractAction
             return static::run(...$arguments);
         }
 
-        return DB::transaction(function () use ($arguments) {
-            return static::run(...$arguments);
-        });
+        return DB::transaction(fn() => static::run(...$arguments));
     }
 }

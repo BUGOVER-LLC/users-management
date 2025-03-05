@@ -42,15 +42,10 @@ class SendMailQueue implements ShouldQueue
      */
     public function handle(): void
     {
-        switch ($this->context) {
-            case EmailType::acceptCode->value:
-                Mail::to($this->address)->send(new AcceptCode($this->address, $this->body));
-                break;
-            case EmailType::inviteUser->value:
-                Mail::to($this->address)->send(new SendInviteUser($this->address, $this->body));
-                break;
-            default:
-                Log::info('Email context type invalid');
-        }
+        match ($this->context) {
+            EmailType::acceptCode->value => Mail::to($this->address)->send(new AcceptCode($this->address, $this->body)),
+            EmailType::inviteUser->value => Mail::to($this->address)->send(new SendInviteUser($this->address, $this->body)),
+            default => Log::info('Email context type invalid'),
+        };
     }
 }

@@ -20,6 +20,7 @@ class LoaderServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    #[\Override]
     public function register(): void
     {
         parent::register();
@@ -27,6 +28,7 @@ class LoaderServiceProvider extends ServiceProvider
         $this->runLoaderRegister();
     }
 
+    #[\Override]
     public function boot(): void
     {
         parent::boot();

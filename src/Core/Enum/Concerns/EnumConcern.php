@@ -22,9 +22,7 @@ trait EnumConcern
             return collect(static::cases())->pluck('value', 'name');
         }
 
-        return collect(static::cases())->mapWithKeys(function ($item) use ($method) {
-            return [$item->name => static::from($item->value)->$method()];
-        });
+        return collect(static::cases())->mapWithKeys(fn($item) => [$item->name => static::from($item->value)->$method()]);
     }
 
     /**
@@ -116,12 +114,10 @@ trait EnumConcern
      */
     public static function toKeyValueCollection(string $method = '', string $keyAttributeName = 'key', string $valueAttributeName = 'value'): Collection
     {
-        return self::all($method)->map(function ($value, $key) use ($keyAttributeName, $valueAttributeName) {
-            return [
-                $keyAttributeName   => $key,
-                $valueAttributeName => $value,
-            ];
-        });
+        return self::all($method)->map(fn($value, $key) => [
+            $keyAttributeName   => $key,
+            $valueAttributeName => $value,
+        ]);
     }
 
     /**
@@ -287,9 +283,7 @@ trait EnumConcern
             return collect(static::cases())->pluck('value', 'value');
         }
 
-        return collect(static::cases())->mapWithKeys(function ($item) use ($method) {
-            return [$item->value => static::from($item->value)->$method()];
-        });
+        return collect(static::cases())->mapWithKeys(fn($item) => [$item->value => static::from($item->value)->$method()]);
     }
 
     /**

@@ -20,7 +20,7 @@ abstract class AbstractObserverAction
     /**
      * @var AuthenticateModel|null
      */
-    protected ?AuthenticateModel $emitting;
+    protected ?AuthenticateModel $emitting = null;
 
     /**
      * @var string

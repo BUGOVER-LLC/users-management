@@ -10,6 +10,7 @@ use Infrastructure\Illuminate\Database\Schema\Blueprint;
 
 class Schema extends BaseSchema
 {
+    #[\Override]
     public static function connection($name): Builder
     {
         return static::customizedSchemaBuilder($name);

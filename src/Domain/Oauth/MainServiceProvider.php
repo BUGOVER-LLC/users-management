@@ -21,6 +21,7 @@ class MainServiceProvider extends BaseServiceProviderAlias
     /**
      * @return void
      */
+    #[\Override]
     public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__ . '/Http/route.php');
@@ -60,6 +61,7 @@ class MainServiceProvider extends BaseServiceProviderAlias
      * @return AuthorizationServer
      * @throws BindingResolutionException
      */
+    #[\Override]
     public function makeAuthorizationServer()
     {
         return new AuthorizationServer(
@@ -77,13 +79,12 @@ class MainServiceProvider extends BaseServiceProviderAlias
      *
      * @return void
      */
+    #[\Override]
     protected function registerResourceServer()
     {
-        $this->app->singleton(ResourceServer::class, function ($container) {
-            return new ResourceServer(
-                accessTokenRepository: $container->make(\App\Domain\Oauth\Repository\OauthAccessTokenRepository::class),
-                publicKey: $this->makeCryptKey('public')
-            );
-        });
+        $this->app->singleton(ResourceServer::class, fn($container) => new ResourceServer(
+            accessTokenRepository: $container->make(\App\Domain\Oauth\Repository\OauthAccessTokenRepository::class),
+            publicKey: $this->makeCryptKey('public')
+        ));
     }
 }

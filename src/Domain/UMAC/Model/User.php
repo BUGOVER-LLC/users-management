@@ -223,9 +223,9 @@ final class User extends AuthenticateModel
      * @param string $email
      * @return static
      */
-    public function findForPassport(string $email): static
+    public function findForPassport(string $email): User
     {
-        return static::where('email', '=', $email)->first();
+        return $this->where('email', '=', $email)->first();
     }
 
     /**
@@ -275,7 +275,7 @@ final class User extends AuthenticateModel
      */
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'parentId', 'userId');
+        return $this->belongsTo(self::class, 'parentId', 'userId');
     }
 
     /**

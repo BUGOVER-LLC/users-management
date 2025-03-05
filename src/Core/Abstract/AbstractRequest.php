@@ -49,6 +49,7 @@ abstract class AbstractRequest extends FormRequest
      *
      * @return array
      */
+    #[\Override]
     final public function messages(): array
     {
         return $this->errorMessages();
@@ -75,6 +76,7 @@ abstract class AbstractRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[\Override]
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): void
     {
         $validationErrors = (new ValidationException($validator))->errors();

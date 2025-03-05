@@ -47,6 +47,7 @@ abstract class AbstractResource extends JsonResource
      * @param string $value
      * @return void
      */
+    #[\Override]
     public static function wrap($value): void
     {
         if (property_exists(self::class, 'wrap')) {

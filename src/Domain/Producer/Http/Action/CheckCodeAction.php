@@ -40,8 +40,8 @@ final class CheckCodeAction extends AbstractAction
             $equal_all_data = false;
         } else {
             $equal_all_data = $sent_code['email'] === $dto->email
-                && 0 === strcmp($sent_code['code'], $dto->code)
-                && 0 === strcmp($sent_code['auth'], $dto->authenticator);
+                && 0 === strcmp((string) $sent_code['code'], $dto->code)
+                && 0 === strcmp((string) $sent_code['auth'], $dto->authenticator);
         }
 
         if (!$equal_all_data) {

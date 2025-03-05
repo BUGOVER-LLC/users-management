@@ -12,18 +12,15 @@ namespace App\Core\Abstract;
 abstract class AbstractFilter
 {
     /**
-     * @var
-     */
-    protected $app;
-
-    /**
      * BaseFilter constructor.
      *
      * @param $app
      */
-    public function __construct($app)
+    public function __construct(/**
+     * @var
+     */
+    protected $app)
     {
-        $this->app = $app;
         $this->filter();
     }
 

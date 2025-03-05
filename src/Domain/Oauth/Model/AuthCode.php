@@ -82,6 +82,7 @@ final class AuthCode extends PassportCodeAlias
      *
      * @return BelongsTo
      */
+    #[\Override]
     public function client()
     {
         return $this->belongsTo(Passport::clientModel());

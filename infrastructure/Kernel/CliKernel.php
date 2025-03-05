@@ -17,6 +17,7 @@ class CliKernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
+    #[\Override]
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('deleteOldestInvite')->hourly()->withoutOverlapping();

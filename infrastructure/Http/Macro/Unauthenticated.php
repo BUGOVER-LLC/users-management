@@ -10,8 +10,6 @@ final class Unauthenticated extends AbstractMacro
 {
     protected function register(): void
     {
-        response()->macro('unauthenticated', function (string $message): JsonResponse {
-            return response()->errorMessage($message, JsonResponse::HTTP_UNAUTHORIZED);
-        });
+        response()->macro('unauthenticated', fn(string $message): JsonResponse => response()->errorMessage($message, JsonResponse::HTTP_UNAUTHORIZED));
     }
 }

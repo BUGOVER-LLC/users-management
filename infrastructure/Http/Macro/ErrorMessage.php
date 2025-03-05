@@ -12,8 +12,6 @@ final class ErrorMessage extends AbstractMacro
 {
     protected function register(): void
     {
-        response()->macro('errorMessage', function (string $message, ?int $code = null): JsonResponse {
-            return response()->schema(new ErrorMessageSchema($message), $code ?? Response::HTTP_BAD_REQUEST);
-        });
+        response()->macro('errorMessage', fn(string $message, ?int $code = null): JsonResponse => response()->schema(new ErrorMessageSchema($message), $code ?? Response::HTTP_BAD_REQUEST));
     }
 }

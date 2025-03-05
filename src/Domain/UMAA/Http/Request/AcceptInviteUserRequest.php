@@ -50,6 +50,7 @@ class AcceptInviteUserRequest extends AbstractRequest
      *
      * @return array
      */
+    #[\Override]
     public function errorMessages(): array
     {
         return parent::errorMessages();

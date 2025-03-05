@@ -10,8 +10,6 @@ final class NotFound extends AbstractMacro
 {
     protected function register(): void
     {
-        response()->macro('notFound', function (string $message): JsonResponse {
-            return response()->errorMessage($message, JsonResponse::HTTP_NOT_FOUND);
-        });
+        response()->macro('notFound', fn(string $message): JsonResponse => response()->errorMessage($message, JsonResponse::HTTP_NOT_FOUND));
     }
 }

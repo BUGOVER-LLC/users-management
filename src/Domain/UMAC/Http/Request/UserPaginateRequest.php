@@ -52,6 +52,7 @@ class UserPaginateRequest extends DefaultPaginateRequest
      *
      * @return void
      */
+    #[\Override]
     public function prepareForValidation(): void
     {
         parent::prepareForValidation();

@@ -98,7 +98,7 @@ final class Devicer extends MobileDetect
             }
         }
 
-        return !$this->isMobile($userAgent, $httpHeaders) && !$this->isTablet($userAgent, $httpHeaders);
+        return !$this->isMobile() && !$this->isTablet();
     }
 
     /**
@@ -202,7 +202,7 @@ final class Devicer extends MobileDetect
      */
     public function isPhone($userAgent = null, $httpHeaders = null): bool
     {
-        return $this->isMobile($userAgent, $httpHeaders) && !$this->isTablet($userAgent, $httpHeaders);
+        return $this->isMobile() && !$this->isTablet();
     }
 
     /**

@@ -17,6 +17,7 @@ final class FileSystemServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    #[\Override]
     public function register(): void
     {
         parent::register();

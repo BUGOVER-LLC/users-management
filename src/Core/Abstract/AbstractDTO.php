@@ -11,9 +11,9 @@ use ReflectionClass;
 
 abstract class AbstractDTO
 {
-    private ?object $user;
+    private ?object $user = null;
 
-    private ?int $id;
+    private ?int $id = null;
 
     public function getId(): ?int
     {

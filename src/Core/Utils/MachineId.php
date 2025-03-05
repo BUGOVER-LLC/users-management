@@ -10,17 +10,17 @@ final class MachineId
 {
     private static ?MachineId $instance = null;
 
-    private string $ipAddress;
+    private readonly string $ipAddress;
 
-    private string $acceptLanguage;
+    private readonly string $acceptLanguage;
 
-    private string $userAgent;
+    private readonly string $userAgent;
 
     private function __construct()
     {
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
         $this->acceptLanguage = !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])
-            ? strtok(strip_tags($_SERVER['HTTP_ACCEPT_LANGUAGE']), ',')
+            ? strtok(strip_tags((string) $_SERVER['HTTP_ACCEPT_LANGUAGE']), ',')
             : '';
         $this->ipAddress = $_SERVER['REMOTE_ADDR'];
     }

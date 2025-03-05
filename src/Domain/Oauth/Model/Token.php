@@ -110,6 +110,7 @@ final class Token extends PassportToken
      *
      * @return BelongsTo
      */
+    #[\Override]
     public function client(): BelongsTo
     {
         return $this->belongsTo(Passport::clientModel());
@@ -120,6 +121,7 @@ final class Token extends PassportToken
      *
      * @return BelongsTo
      */
+    #[\Override]
     public function user(): BelongsTo
     {
         $provider = config('auth.guards.api.provider');
@@ -142,6 +144,7 @@ final class Token extends PassportToken
      * @param string $scope
      * @return bool
      */
+    #[\Override]
     public function cant($scope): bool
     {
         return !$this->can($scope);
@@ -153,6 +156,7 @@ final class Token extends PassportToken
      * @param string $scope
      * @return bool
      */
+    #[\Override]
     public function can($scope): bool
     {
         if (in_array('*', $this->scopes, true)) {
@@ -177,6 +181,7 @@ final class Token extends PassportToken
      *
      * @return bool
      */
+    #[\Override]
     public function revoke(): bool
     {
         return $this->forceFill(['revoked' => true])->save();
@@ -187,6 +192,7 @@ final class Token extends PassportToken
      *
      * @return bool
      */
+    #[\Override]
     public function transient(): bool
     {
         return false;

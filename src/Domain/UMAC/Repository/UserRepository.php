@@ -85,27 +85,23 @@ class UserRepository extends EloquentRepository
     public function getUserPagerBuilder(AbstractDTO $dto): WhereClauseContract
     {
         return $this
-            ->when((PersonType::user->value === $dto->personType), function (Builder $qb) use ($dto) {
-                return $qb
-                    ->has('profile')
-                    ->where('active', '=', $dto->active)
-                    ->with('profile')
-                    ->when($dto->search ?? false, fn(Builder $qb) => $qb
-                        ->whereHas('profile', fn(Builder $qb) => $qb
-                            ->where('firstName', 'LIKE', "%$dto->search%")
-                            ->orWhere('lastName', 'LIKE', "%$dto->search%")
-                            ->orWhere('psn', 'LIKE', "%$dto->search%")));
-            })
-            ->when((PersonType::invitation->value === $dto->personType), function (Builder $qb) use ($dto) {
-                return $qb
-                    ->has('invitation')
-                    ->with(['invitation', 'profile'])
-                    ->when($dto->search ?? false, fn(Builder $ab) => $qb
-                        ->whereHas('invitation', fn(Builder $qb) => $qb
-                            ->where('psnInfo->firstName', 'LIKE', "%$dto->search%")
-                            ->orWhere('psnInfo->lastName', 'LIKE', "%$dto->search%")
-                            ->orWhere('psnInfo->psn', 'LIKE', "%$dto->search%")));
-            });
+            ->when((PersonType::user->value === $dto->personType), fn(Builder $qb) => $qb
+                ->has('profile')
+                ->where('active', '=', $dto->active)
+                ->with('profile')
+                ->when($dto->search ?? false, fn(Builder $qb) => $qb
+                    ->whereHas('profile', fn(Builder $qb) => $qb
+                        ->where('firstName', 'LIKE', "%$dto->search%")
+                        ->orWhere('lastName', 'LIKE', "%$dto->search%")
+                        ->orWhere('psn', 'LIKE', "%$dto->search%"))))
+            ->when((PersonType::invitation->value === $dto->personType), fn(Builder $qb) => $qb
+                ->has('invitation')
+                ->with(['invitation', 'profile'])
+                ->when($dto->search ?? false, fn(Builder $ab) => $qb
+                    ->whereHas('invitation', fn(Builder $qb) => $qb
+                        ->where('psnInfo->firstName', 'LIKE', "%$dto->search%")
+                        ->orWhere('psnInfo->lastName', 'LIKE', "%$dto->search%")
+                        ->orWhere('psnInfo->psn', 'LIKE', "%$dto->search%"))));
     }
 
     /**

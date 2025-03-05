@@ -12,6 +12,7 @@ use Override;
 
 class Blueprint extends BaseBlueprint
 {
+    #[\Override]
     public function foreignId($column): ForeignIdColumnDefinition|ColumnDefinition
     {
         return $this->addColumnDefinition(new ForeignIdColumnDefinition($this, [

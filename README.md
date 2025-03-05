@@ -10,7 +10,7 @@
 
 * php version 8.3.2 or greater
 * nodejs version is greater 16.14 and small or equal 20.
-* mysql 8.0
+* mysql 8.4
 
 ---
 
@@ -217,7 +217,6 @@ make ecs
 make ecs-fix
 make phpmetrics
 make phpcpd
-make phpmd
 make phpstan
 make phpinsights
 
@@ -226,7 +225,7 @@ etc....
 Notes: Please see more commands in Makefile
 
 ## Architecture & packages
-* [Laravel 10](https://laravel.com)
+* [Laravel 11](https://laravel.com)
 * [phpunit](https://github.com/sebastianbergmann/phpunit)
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper)
 * [scriptsdev](https://github.com/neronmoon/scriptsdev)
@@ -238,8 +237,6 @@ Notes: Please see more commands in Makefile
 * [php-coveralls](https://github.com/php-coveralls/php-coveralls)
 * [easy-coding-standard](https://github.com/Symplify/EasyCodingStandard)
 * [PhpMetrics](https://github.com/phpmetrics/PhpMetrics)
-* [phpcpd](https://github.com/systemsdk/phpcpd)
-* [phpmd](https://packagist.org/packages/phpmd/phpmd)
 * [phpstan](https://packagist.org/packages/nunomaduro/larastan)
 * [phpinsights](https://packagist.org/packages/nunomaduro/phpinsights)
 * [rector](https://packagist.org/packages/rector/rector)

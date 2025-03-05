@@ -134,7 +134,7 @@ final class CreateCitizenPersonalAccessTokenAction extends AbstractAction
             'jwtDevice' => $device,
         ], now()->addMinute());
 
-        if (get_class($account) === User::class) {
+        if ($account::class === User::class) {
             $role = $this->roleRepository->findWithPermissions($account->roleId);
             $attribute = $this->attributeRepository->findByUserSystemId($account->userId);
 

@@ -28,13 +28,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
     }
 
+    #[\Override]
     public function register(): void
     {
         $this->app->bind(
             abstract: AuthorizedUserContract::class,
-            concrete: function (Application $app) {
-                return new AuthorizedUser();
-            },
+            concrete: fn(Application $app) => new AuthorizedUser(),
         );
     }
 }

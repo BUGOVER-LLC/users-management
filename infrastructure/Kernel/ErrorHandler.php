@@ -37,6 +37,7 @@ class ErrorHandler extends ExceptionHandler
     /**
      * Register the exception handling callbacks for the application.
      */
+    #[\Override]
     public function register(): void
     {
         // REPORTS 💩
@@ -108,19 +109,18 @@ class ErrorHandler extends ExceptionHandler
         }
     }
 
+    #[\Override]
     public function render($request, Throwable $exception)
     {
         if ($request->wantsJson()) {
-            $this->renderable(function (AuthenticationException $e, $request) {
-                return jsponse(
-                    data: [
-                        'status' => Response::HTTP_UNAUTHORIZED,
-                        'message' => __('http-statuses.401'),
-                        'errors' => [],
-                    ],
-                    status: Response::HTTP_UNAUTHORIZED,
-                );
-            });
+            $this->renderable(fn(AuthenticationException $e, $request) => jsponse(
+                data: [
+                    'status' => Response::HTTP_UNAUTHORIZED,
+                    'message' => __('http-statuses.401'),
+                    'errors' => [],
+                ],
+                status: Response::HTTP_UNAUTHORIZED,
+            ));
 
             $this->reportable(function (HttpException $e) {
                 $message = Response::$statusTexts[$e->getStatusCode()];

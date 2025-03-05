@@ -68,19 +68,16 @@ class AddHttp2ServerPush
         $excludeKeywords = null
     ): static
     {
-        $excludeKeywords = $excludeKeywords ?? $this->getConfig('exclude_keywords', []);
-        $headers = $this->fetchLinkableNodes($response)->flatten(1)->map(function ($url) {
-                return $this->buildLinkHeaderString($url);
-        })->unique()->filter(function ($value) use ($excludeKeywords) {
+        $excludeKeywords ??= $this->getConfig('exclude_keywords', []);
+        $headers = $this->fetchLinkableNodes($response)->flatten(1)->map(fn($url) => $this->buildLinkHeaderString($url))->unique()->filter(function ($value) use ($excludeKeywords) {
             if (!$value) {
                 return false;
             }
-            $exclude_keywords = collect($excludeKeywords)->map(function ($keyword) {
+            $exclude_keywords = collect($excludeKeywords)->map(fn($keyword) =>
                 /**
                  * @noinspection PregQuoteUsageInspection
                  */
-                return preg_quote($keyword);
-            });
+                preg_quote($keyword));
             if ($exclude_keywords->count() <= 0) {
                 return true;
             }
@@ -88,7 +85,7 @@ class AddHttp2ServerPush
             return !preg_match('%(' . $exclude_keywords->implode('|') . ')%i', $value);
         })->take($limit);
 
-        $sizeLimit = $sizeLimit ?? max(1, (int) $this->getConfig('nyt.push.size_limit', 32 * 1024));
+        $sizeLimit ??= max(1, (int) $this->getConfig('nyt.push.size_limit', 32 * 1024));
         $headersText = trim($headers->implode(','));
 
         while (strlen($headersText) > $sizeLimit) {

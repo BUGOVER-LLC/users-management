@@ -15,7 +15,7 @@ class SetTypeCast implements CastsAttributes
 {
     #[\Override] public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
-        return explode(',', $value);
+        return explode(',', (string) $value);
     }
 
     /**

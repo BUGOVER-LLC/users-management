@@ -54,6 +54,7 @@ final class PersonalClient extends PassportPersonalAccessClient
      *
      * @return BelongsTo
      */
+    #[\Override]
     public function client()
     {
         return $this->belongsTo(Passport::clientModel());

@@ -70,7 +70,7 @@ class SyncCreatedUserApiTrigger
             logging($exception);
 
             $message_decode = json_decode(
-                $exception->getResponse()->getBody()->getContents(),
+                (string) $exception->getResponse()->getBody()->getContents(),
                 false,
                 512,
                 JSON_THROW_ON_ERROR

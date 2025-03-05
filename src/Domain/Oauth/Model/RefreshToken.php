@@ -75,6 +75,7 @@ final class RefreshToken extends PassportRefreshToken
      *
      * @return BelongsTo
      */
+    #[\Override]
     public function accessToken()
     {
         return $this->belongsTo(Passport::tokenModel());
@@ -85,6 +86,7 @@ final class RefreshToken extends PassportRefreshToken
      *
      * @return bool
      */
+    #[\Override]
     public function revoke()
     {
         return $this->forceFill(['revoked' => true])->save();
@@ -95,6 +97,7 @@ final class RefreshToken extends PassportRefreshToken
      *
      * @return bool
      */
+    #[\Override]
     public function transient()
     {
         return false;

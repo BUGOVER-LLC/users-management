@@ -103,6 +103,7 @@ class NoResidentSignUpRequest extends AbstractRequest
         ];
     }
 
+    #[\Override]
     public function attributes(): array
     {
         return __('attribute.noResidentSign');
