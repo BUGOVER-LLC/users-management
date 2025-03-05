@@ -6,13 +6,14 @@ namespace App\Core\FileSystem\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use JsonException;
 
-class SignableDocument implements CastsAttributes
+final class SignableDocument implements CastsAttributes
 {
     /**
      * Returns uploaded file(s)
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): ?array
     {
@@ -26,7 +27,7 @@ class SignableDocument implements CastsAttributes
     /**
      * Automatically upload file(s) while saving record.
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): ?array
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Console;
+namespace App\Shared\Infrastructure\Command;
 
 use App\Domain\UMAC\Model\InvitationUser;
 use App\Domain\UMAC\Repository\InvitationUserRepository;

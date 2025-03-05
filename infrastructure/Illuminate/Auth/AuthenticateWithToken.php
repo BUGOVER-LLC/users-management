@@ -9,6 +9,7 @@ use App\Domain\Oauth\Repository\OauthAccessTokenRepository;
 use App\Domain\Oauth\Repository\OauthClientRepository;
 use App\Domain\UMAC\Model\User;
 use Illuminate\Validation\UnauthorizedException;
+use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Encoding\JoseEncoder;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
@@ -17,7 +18,6 @@ use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token\Parser;
 use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
-use Lcobucci\JWT\Configuration;
 
 class AuthenticateWithToken
 {
@@ -41,41 +41,6 @@ class AuthenticateWithToken
         $this->configuration = $this->buildConfig();
     }
 
-    /**
-     * @return mixed
-     */
-    public function handle()
-    {
-        $bearerToken = request()->bearerToken();
-
-        if (! $bearerToken) {
-            throw new UnauthorizedException();
-        }
-
-        $token = (new Parser(new JoseEncoder()))->parse($bearerToken);
-        $this->jti = $token->claims()->get('jti');
-
-        if (! $this->validate($token)) {
-            throw new \RuntimeException('Invalid token');
-        }
-
-        return $this->user();
-    }
-
-    protected function user()
-    {
-        $accessToken = $this->oauthAccessTokenRepository->findByIdWithClient($this->jti);
-        $provider = $accessToken->client->provider;
-
-        if (! $provider) {
-            throw new \RuntimeException('Unable to retrieve OAuth provider');
-        }
-
-        $model = config("auth.providers.{$provider}.model");
-
-        return $model::findOrFail($accessToken->user_id);
-    }
-
     protected function buildConfig(): Configuration
     {
         $config = Configuration::forAsymmetricSigner(
@@ -84,7 +49,7 @@ class AuthenticateWithToken
             verificationKey: $this->getVerificationKey(),
         );
 
-        $config->setValidationConstraints(
+        $config->withValidationConstraints(
             new SignedWith(
                 signer: $this->signer,
                 key: $this->getVerificationKey(),
@@ -92,6 +57,49 @@ class AuthenticateWithToken
         );
 
         return $config;
+    }
+
+    protected function getSigningKey(): Key
+    {
+        return $this->getKey(
+            contents: file_get_contents(storage_path('private/oauth/oauth-private.key')),
+        );
+    }
+
+    /**
+     * Get the signing key instance.
+     */
+    protected function getKey(string $contents, string $passphrase = ''): Key
+    {
+        return InMemory::plainText($contents, $passphrase);
+    }
+
+    protected function getVerificationKey(): Key
+    {
+        return $this->getKey(
+            contents: file_get_contents(storage_path('private/oauth/oauth-public.key')),
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function handle()
+    {
+        $bearerToken = request()->bearerToken();
+
+        if (!$bearerToken) {
+            throw new UnauthorizedException();
+        }
+
+        $token = (new Parser(new JoseEncoder()))->parse($bearerToken);
+        $this->jti = $token->claims()->get('jti');
+
+        if (!$this->validate($token)) {
+            throw new \RuntimeException('Invalid token');
+        }
+
+        return $this->user();
     }
 
     public function validate(Plain $token): bool
@@ -103,25 +111,17 @@ class AuthenticateWithToken
             ->validate($token, ...$constraints);
     }
 
-    protected function getSigningKey(): Key
+    protected function user()
     {
-        return $this->getKey(
-            contents: file_get_contents(base_path('oauth/oauth-private.key')),
-        );
-    }
+        $accessToken = $this->oauthAccessTokenRepository->findByIdWithClient($this->jti);
+        $provider = $accessToken?->client->provider;
 
-    protected function getVerificationKey(): Key
-    {
-        return $this->getKey(
-            contents: file_get_contents(base_path('oauth/oauth-public.key')),
-        );
-    }
+        if (!$provider) {
+            throw new \RuntimeException('Unable to retrieve OAuth provider');
+        }
 
-    /**
-     * Get the signing key instance.
-     */
-    protected function getKey(string $contents, string $passphrase = ''): Key
-    {
-        return InMemory::plainText($contents, $passphrase);
+        $model = config("auth.providers.{$provider}.model");
+
+        return $model::findOrFail($accessToken?->user_id);
     }
 }

@@ -51,8 +51,8 @@ class AppServiceProvider extends ServiceProvider
             return;
         }
 
-        $strict = (bool)config('app.strict');
-        $level = (int)config('app.strict_level');
+        $strict = (bool) config('app.strict');
+        $level = (int) config('app.strict_level');
 
         if ($strict) {
             if (1 === $level) {

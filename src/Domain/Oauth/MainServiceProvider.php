@@ -27,8 +27,8 @@ class MainServiceProvider extends BaseServiceProviderAlias
         $this->loadRoutesFrom(__DIR__ . '/Http/route.php');
 
         // Keys path
-        Passport::loadKeysFrom(base_path('oauth'));
-        Passport::keyPath(base_path('oauth'));
+        Passport::loadKeysFrom(storage_path('private/oauth'));
+        Passport::keyPath(storage_path('private/oauth'));
 
         // Grants
         Passport::enablePasswordGrant();

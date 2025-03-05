@@ -19,11 +19,14 @@ readonly class FileDTO implements Arrayable
     {
     }
 
+    /**
+     * @return array{name: string, fileName: string, mimeType: string, size: string, uploadetAt: string}
+     */
     #[
         ArrayShape([
             'name' => 'string',
-            'file_name' => 'string',
-            'mime_type' => 'string',
+            'fileName' => 'string',
+            'mimeType' => 'string',
             'size' => 'string',
             'uploadedAt' => 'string',
         ])
@@ -32,8 +35,8 @@ readonly class FileDTO implements Arrayable
     {
         return [
             'name' => $this->name,
-            'file_name' => $this->originalName,
-            'mime_type' => $this->mime,
+            'fileName' => $this->originalName,
+            'mimeType' => $this->mime,
             'size' => $this->size,
             'uploadedAt' => $this->uploadedAt ?? now()->toDateTimeString(),
         ];

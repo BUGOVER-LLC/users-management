@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\FileSystem;
 
-use App\Core\Contracts\FileSystemContract;
+use App\Core\FileSystem\Contracts\FileSystemContract;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -17,7 +17,6 @@ final class FileSystemServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    #[\Override]
     public function register(): void
     {
         parent::register();

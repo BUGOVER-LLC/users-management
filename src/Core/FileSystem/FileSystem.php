@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\FileSystem;
 
-use App\Core\Contracts\FileSystemContract;
+use App\Core\FileSystem\Contracts\FileSystemContract;
+use Aws\S3\S3Client;
 use DateTimeInterface;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
@@ -12,36 +13,38 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
+use League\Flysystem\UnableToCopyFile;
 use Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use ZipArchive;
 
 use function is_array;
 use function is_string;
 
 final class FileSystem implements FileSystemContract
 {
-    protected string $bucket;
+    protected string $disk;
 
     protected null|string $folder = null;
 
     public function __construct()
     {
-        $this->bucket = 's3';
+        $this->disk = 's3';
     }
 
-    public function setBucket(string $bucket): FileSystem
+    public function setDisk(string $disk): FileSystem
     {
-        $this->bucket = $bucket;
+        $this->disk = $disk;
 
         return $this;
     }
 
-    public function getBucket(): string
+    public function getDisk(): string
     {
-        return $this->bucket;
+        return $this->disk;
     }
 
     public function setFolder(string $folder): FileSystem
@@ -66,11 +69,24 @@ final class FileSystem implements FileSystemContract
         return "$folder/";
     }
 
+    /**
+     * @return $this
+     */
     public function signedDocuments(): FileSystem
     {
-        $this->bucket = 's3signed';
+        $this->disk = 's3signed';
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBucket(): string
+    {
+        $client = $this->client();
+
+        return config('filesystems.disks.' . $client->getConfig('signing_name') . '.bucket');
     }
 
     /**
@@ -97,12 +113,12 @@ final class FileSystem implements FileSystemContract
             $uploadedFileInfo = [];
 
             foreach ($file as $uploadedFile) {
-                if ($uploadedFile instanceof UploadedFile) {
-                    $uploadedFileInfo[] = $this->saveInBucket($uploadedFile);
+                if (isset($uploadedFile['file']) && $uploadedFile['file'] instanceof UploadedFile) {
+                    $uploadedFileInfo[] = $this->saveInBucket($uploadedFile['file']);
                 }
 
-                if (is_string($uploadedFile)) {
-                    $uploadedFileInfo[] = $this->saveBase64File($uploadedFile);
+                if (isset($uploadedFile['file']) && is_string($uploadedFile['file'])) {
+                    $uploadedFileInfo[] = $this->saveBase64File($uploadedFile['file']);
                 }
             }
 
@@ -116,16 +132,35 @@ final class FileSystem implements FileSystemContract
         return $this->saveInBucket($file);
     }
 
+    /**
+     * @param array|string $paths
+     * @return bool
+     */
     public function delete(array|string $paths): bool
     {
         return $this->storage()->delete($paths);
     }
 
+    /**
+     * Generates a signed URL for the given file path.
+     *
+     * @param string $path
+     * @return string
+     */
     public function url(string $path): string
     {
-        return $this->storage()->url($path);
+        return $this
+            ->client()
+            ->getObjectUrl(
+                bucket: $this->getBucket(),
+                key: $path,
+            );
     }
 
+    /**
+     * @param string $path
+     * @return string|null
+     */
     public function get(string $path): null|string
     {
         return $this->storage()->get($path);
@@ -145,7 +180,7 @@ final class FileSystem implements FileSystemContract
     public function download(
         string $path,
         bool $temporaryUrl = false,
-        DateTimeInterface $expiration = null
+        null|DateTimeInterface $expiration = null
     ): StreamedResponse|string
     {
         $storage = $this->storage();
@@ -171,6 +206,51 @@ final class FileSystem implements FileSystemContract
         return $storage->download($basename, $filename, $headers);
     }
 
+    /**
+     * @param array $filesMoveToZip
+     * @param string $zipName
+     * @return string|null
+     */
+    public function downloadZip(array $filesMoveToZip, string $zipName = 'archive'): null|string
+    {
+        $zip = new ZipArchive();
+        $fileName = base_path('storage') . "/$zipName.zip";
+
+        if (true !== $zip->open($fileName, ZipArchive::CREATE)) {
+            return null;
+        }
+
+        foreach ($filesMoveToZip as $fileToZip) {
+            $fileToZip = explode('/', $fileToZip);
+            $length = count($fileToZip) - 1;
+            if ($length >= 5) {
+                $fileToZip = $fileToZip[$length - 1] . '/' . $fileToZip[$length];
+            } else {
+                $fileToZip = $fileToZip[$length];
+            }
+
+            $storage = null;
+            if ($this->storage()->exists($fileToZip) || $this->signedDocuments()->storage()->exists($fileToZip)) {
+                $storage = !$this->storage()->missing($fileToZip) ? $this->storage() : $this->signedDocuments(
+                )->storage();
+                $fileContent = $storage->get($fileToZip);
+                $zip->addFromString($fileToZip, $fileContent);
+            }
+        }
+
+        if (-1 === $zip->lastId) {
+            return null;
+        }
+
+        $zip->close();
+
+        return $fileName;
+    }
+
+    /**
+     * @param string $path
+     * @return int
+     */
     public function getSize(string $path): int
     {
         return $this->storage()->size($path);
@@ -187,18 +267,19 @@ final class FileSystem implements FileSystemContract
      */
     public function saveInBucket(UploadedFile $file): ?array
     {
+        $client = $this->client();
+        $url = config('filesystems.disks.' . $client->getConfig('signing_name') . '.url');
         $uploadedFileInfo = $this->getUploadedFileInfo($file);
-
+        $filePathName = $this->getFolder() . $uploadedFileInfo['name'];
         $fileSaved = $this->storage()->put(
-            path: $this->getFolder() . $uploadedFileInfo['name'],
-            contents: $file->getContent()
+            $filePathName,
+            $file->getContent(),
         );
-
         if (!$fileSaved) {
             throw new CannotWriteFileException("Can't save file");
         }
 
-        return ['path' => $this->url($uploadedFileInfo['name'])] + $uploadedFileInfo;
+        return ['path' => "$url/$filePathName"] + $uploadedFileInfo;
     }
 
     /**
@@ -255,22 +336,42 @@ final class FileSystem implements FileSystemContract
         return $fileDTO->toArray();
     }
 
+    /**
+     * @param UploadedFile $file
+     * @return string
+     */
     public function hashName(UploadedFile $file): string
     {
-        $originalName = Str::of($file->getClientOriginalName())->beforeLast('.')->toString();
-        $extension = $file->extension();
-
-        return md5($originalName) . "-$originalName.$extension";
+        return $this->hashOriginalName($file->getClientOriginalName());
     }
 
-    protected function decryptFileName(string $fileName): string
+    /**
+     * @param $name
+     * @return string
+     */
+    public function hashOriginalName($name): string
+    {
+        $originalName = Str::of($name)->beforeLast('.')->replace(' ', '-')->toString();
+        $extension = Str::of($name)->afterLast('.')->toString();
+
+        return Str::random(5) . "-$originalName.$extension";
+    }
+
+    /**
+     * @param string $fileName
+     * @return string
+     */
+    public function decryptFileName(string $fileName): string
     {
         return Str::of($fileName)->after('-')->toString();
     }
 
+    /**
+     * @return LaravelFilesystem
+     */
     public function storage(): LaravelFilesystem
     {
-        return Storage::disk($this->getBucket());
+        return Storage::disk($this->getDisk());
     }
 
     /**
@@ -302,7 +403,7 @@ final class FileSystem implements FileSystemContract
     protected function createUploadedFileInstance(
         string $path,
         string $originalName,
-        string $mimeType,
+        string $mimeType
     ): UploadedFile
     {
         return new UploadedFile(
@@ -312,5 +413,65 @@ final class FileSystem implements FileSystemContract
             error: 0,
             test: false,
         );
+    }
+
+    /**
+     * @param $filePath
+     * @param $toPath
+     * @return mixed
+     * @throws \Exception
+     */
+    public function copyTo($filePath, $toPath)
+    {
+        $client = $this->client();
+
+        $copiedFile = $client->copyObject([
+            'Bucket' => $this->getBucket(),
+            'Key' => "{$this->getBucket()}/$toPath",
+            'CopySource' => "{$this->getBucket()}/$filePath",
+            'ACL' => 'public-read',
+        ]);
+
+        if ($copiedFile) {
+            return $copiedFile->search('ObjectURL');
+        }
+
+        throw UnableToCopyFile::fromLocationTo($filePath, $toPath);
+    }
+
+    /**
+     * @param $fileObject
+     * @return mixed
+     * @throws \Exception
+     */
+    public function copyFileObject($fileObject)
+    {
+        $newFileName = $this->hashOriginalName($fileObject['fileName']);
+
+        $copiedFile = $this->copyTo($fileObject['name'], $newFileName);
+        $fileObject['name'] = $newFileName;
+        $fileObject['path'] = $copiedFile;
+        $fileObject['uploadedAt'] = now();
+
+        return $fileObject;
+    }
+
+    /**
+     * @return S3Client
+     */
+    protected function client(): S3Client
+    {
+        return new S3Client([
+            'region' => config('filesystems.disks.' . $this->getDisk() . '.region'),
+            'version' => 'latest',
+            'use_path_style_endpoint' => true,
+            'signing_name' => $this->getDisk(),
+            'url' => config('filesystems.disks.' . $this->getDisk() . '.url'),
+            'endpoint' => config('filesystems.disks.' . $this->getDisk() . '.endpoint'),
+            'credentials' => [
+                'key' => config('filesystems.disks.' . $this->getDisk() . '.key'),
+                'secret' => config('filesystems.disks.' . $this->getDisk() . '.secret'),
+            ],
+        ]);
     }
 }

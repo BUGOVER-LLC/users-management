@@ -9,7 +9,6 @@ use Infrastructure\Http\Macro\ErrorMessage;
 use Infrastructure\Http\Macro\NotFound;
 use Infrastructure\Http\Macro\Unauthenticated;
 use Infrastructure\Providers\Traits\AutoLoaderTrait;
-use JetBrains\PhpStorm\NoReturn;
 
 class LoaderServiceProvider extends ServiceProvider
 {

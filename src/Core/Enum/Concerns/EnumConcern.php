@@ -112,10 +112,14 @@ trait EnumConcern
      * @param string $valueAttributeName (optional) The attribute name to be used for the values in the resulting key-value pairs.
      * @return Collection Returns a Collection with key-value pairs.
      */
-    public static function toKeyValueCollection(string $method = '', string $keyAttributeName = 'key', string $valueAttributeName = 'value'): Collection
+    public static function toKeyValueCollection(
+        string $method = '',
+        string $keyAttributeName = 'key',
+        string $valueAttributeName = 'value'
+    ): Collection
     {
         return self::all($method)->map(fn($value, $key) => [
-            $keyAttributeName   => $key,
+            $keyAttributeName => $key,
             $valueAttributeName => $value,
         ]);
     }
@@ -128,7 +132,11 @@ trait EnumConcern
      * @param string $valueAttributeName (optional) The attribute name to be used for the values in the resulting key-value pairs.
      * @return array Returns an array with key-value pairs.
      */
-    public static function toKeyValueArray(string $method = '', string $keyAttributeName = 'key', string $valueAttributeName = 'value'): array
+    public static function toKeyValueArray(
+        string $method = '',
+        string $keyAttributeName = 'key',
+        string $valueAttributeName = 'value'
+    ): array
     {
         return self::toKeyValueCollection($method, $keyAttributeName, $valueAttributeName)->values()->toArray();
     }
@@ -283,7 +291,9 @@ trait EnumConcern
             return collect(static::cases())->pluck('value', 'value');
         }
 
-        return collect(static::cases())->mapWithKeys(fn($item) => [$item->value => static::from($item->value)->$method()]);
+        return collect(static::cases())->mapWithKeys(
+            fn($item) => [$item->value => static::from($item->value)->$method()]
+        );
     }
 
     /**
@@ -305,7 +315,7 @@ trait EnumConcern
      */
     public function isNot(UnitEnum $enum): bool
     {
-        return ! $this->is($enum);
+        return !$this->is($enum);
     }
 
     /**
@@ -327,6 +337,6 @@ trait EnumConcern
      */
     public function isNotAny(...$enums): bool
     {
-        return ! $this->isAny(...$enums);
+        return !$this->isAny(...$enums);
     }
 }
