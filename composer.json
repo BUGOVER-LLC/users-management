@@ -21,7 +21,7 @@
     "ext-swoole": "*",
     "bugover/laravel-repository": "^1.5.0",
     "composer/class-map-generator": "^1.0.0",
-    "darkaonline/l5-swagger": "^8.0.0",
+    "darkaonline/l5-swagger": "^9.0.1",
     "fruitcake/php-cors": "^1.3.0",
     "guzzlehttp/guzzle": "^7.0.0",
     "laravel/framework": "^11.0.0",
