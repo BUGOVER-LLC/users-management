@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Infrastructure\Eloquent\Model\Entity\ServiceModel
+use Infrastructure\Eloquent\Model\Attribute\ModelEntity;
+
+#[ModelEntity(repositoryClass: '')]
+class {{ class }} extends ServiceModel
+{
+    /**
+     * @var string
+     */
+    protected $table = '';
+
+    /**
+     * @var string
+     */
+    protected $primaryKey = '';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+    ];
+}

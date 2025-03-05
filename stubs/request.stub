@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Src\Core\Abstracts\BaseRequest;
+use Illuminate\Support\Facades\Auth;
+
+class {{ class }} extends BaseRequest
+{
+    /**
+    * Determine if the user is authorized to make this request.
+    *
+    * @return bool
+    */
+    public function authorize(): bool
+    {
+        return Auth::check();
+    }
+
+    /**
+    * Get the validation rules that apply to the request.
+    *
+    * @return array
+    */
+    public function rules(): array
+    {
+        return [
+           '' => ['']
+        ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    public function prepareForValidation(): void
+    {
+        parent::prepareForValidation();
+    }
+
+    /**
+    * @return array
+    */
+    public function errorMessages(): array
+    {
+        return [
+            '' => ''
+        ];
+    }
+}

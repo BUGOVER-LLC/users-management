@@ -1,0 +1,124 @@
+<v-container fluid>
+    <!--    RESOURCES    -->
+    <v-card class="rounded-lg mb-5 elevation-1" :loading="resourcesLoading">
+        <v-card-title class="accent">
+            {{ $tc('app.subtypes', 2) }}
+            <v-spacer />
+            <v-btn icon @click="resourceDialog = true"><v-icon color="grey darken-4" v-text="'mdi-plus'" /></v-btn>
+        </v-card-title>
+        <v-divider />
+        <v-card-text :style="{ height: (window.height - 300) / 2 + 'px' }" style="overflow: auto">
+            <v-simple-table dense fixed-header>
+                <template v-slot:default>
+                    <thead>
+                        <tr>
+                            <th id="attributeName" class="text-left"> {{ $t('users.first_name') }} </th>
+                            <th id="attributeValue" class="text-left"> {{ $t('words.key') }} </th>
+                            <th id="attributeDescription" class="text-left"> {{ $t('words.description') }} </th>
+                            <th id="attributeCreatedAT" class="text-left"> {{ $t('words.createdAt') }} </th>
+                            <th id="attributeOptions" class="text-left"> {{ $t('words.options') }} </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in resources" :key="item.resourceValue">
+                            <td>{{ item.resourceName }}</td>
+                            <td>{{ item.resourceValue }}</td>
+                            <td>{{ item.resourceDescription }}</td>
+                            <td>{{ item.createdAt | formatData }}</td>
+                            <td>
+                                <v-btn icon small @click="(dialogData = item), (deleteDialog = true)">
+                                    <v-icon v-text="'mdi-delete-outline'" color="red" />
+                                </v-btn>
+                                <v-btn icon small @click="editResource(item)"
+                                    ><v-icon v-text="'mdi-book-edit-outline'" color="black"
+                                /></v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-card-text>
+    </v-card>
+
+    <!--    ATTRIBUTES    -->
+    <v-card class="rounded-lg elevation-1" :loading="attributesLoading">
+        <v-card-title class="accent">
+            {{ $tc('app.branches', 2) }}
+            <v-spacer />
+            <v-btn icon @click="attributeDialog = true"><v-icon color="grey darken-4" v-text="'mdi-plus'" /></v-btn>
+        </v-card-title>
+        <v-divider />
+        <v-card-text :style="{ height: window.height / 1.85 + 'px' }" style="overflow: auto">
+            <v-simple-table dense fixed-header>
+                <template v-slot:default>
+                    <thead>
+                        <tr>
+                            <th id="attributeName" class="text-left"> {{ $t('users.first_name') }} </th>
+                            <th id="attributeValue" class="text-left"> {{ $t('words.key') }} </th>
+                            <th id="attributeResource" class="text-left"> {{ $tc('app.subtypes', 1) }} </th>
+                            <th id="attributeDescription" class="text-left"> {{ $t('words.description') }} </th>
+                            <th id="attributeCreatedAT" class="text-left"> {{ $t('words.createdAt') }} </th>
+                            <th id="attributeOptions" class="text-left"> {{ $t('words.options') }} </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in attributes" :key="item.attributeValue">
+                            <td>{{ item.attributeName }}</td>
+                            <td>{{ item.attributeValue }}</td>
+                            <td>{{ resourceName(item.resourceId) }}</td>
+                            <td>{{ item.attributeDescription }}</td>
+                            <td>{{ item.createdAt | formatData }}</td>
+                            <td>
+                                <v-btn icon small @click="(dialogData = item), (deleteDialog = true)">
+                                    <v-icon v-text="'mdi-delete-outline'" color="red" />
+                                </v-btn>
+                                <v-btn icon small @click="editAttribute(item)">
+                                    <v-icon v-text="'mdi-book-edit-outline'" color="black" />
+                                </v-btn>
+                                <v-btn icon small @click="editRoom(item)">
+                                    <v-icon v-text="'mdi-home-export-outline'" color="black" />
+                                </v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-card-text>
+    </v-card>
+
+    <v-dialog v-if="attributeDialog" v-model="attributeDialog" max-width="600px" width="100%" persistent>
+        <AttributeDialog
+            v-model="attributeDialog"
+            :edit-data="dialogData"
+            @update:value="(dialogData = null), (attributeDialog = $event)"
+        />
+    </v-dialog>
+
+    <v-dialog v-if="resourceDialog" v-model="resourceDialog" max-width="600px" width="100%" persistent>
+        <ResourceDialog
+            v-model="resourceDialog"
+            :edit-data="dialogData"
+            @update:value="(dialogData = null), (resourceDialog = $event)"
+        />
+    </v-dialog>
+
+    <v-dialog v-if="deleteDialog" v-model="deleteDialog" width="100%" max-width="350">
+        <ApproveDialog
+            v-model="deleteDialog"
+            :title="
+                    'resourceName' in dialogData
+                        ? $t('words.delete') + ' ' + $tc('app.subtypes', 2)
+                        : $t('words.delete') + ' ' + $tc('app.branches', 2)
+                "
+            @update:value="'resourceName' in dialogData ? deleteResource($event) : deleteAttribute($event)"
+        />
+    </v-dialog>
+
+    <v-dialog v-if="roomDialog" v-model="roomDialog" width="100%" max-width="600" persistent>
+        <RoomDialog
+            v-model="dialogData"
+            @update:value="(dialogData = null), (roomDialog = $event)"
+            :attribute="dialogData"
+        />
+    </v-dialog>
+</v-container>

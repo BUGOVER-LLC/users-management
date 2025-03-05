@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Infrastructure\Eloquent\Model\Traits\ScopeHelpers;
+
+class {{ class }} extends Pivot
+{
+    use ScopeHelpers;
+
+    /**
+     * @var string
+     */
+    protected $table = '';
+
+    /**
+     * @var string
+     */
+    protected $primaryKey = '';
+
+    /**
+     * @var string|BaseRepositoryContract
+     */
+    protected string|BaseRepositoryContract $modelRepositoryClass = '';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+    ];
+}

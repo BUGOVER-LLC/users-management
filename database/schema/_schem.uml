@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CassationCourtCaseDetails</OriginalElement>
+  <nodes>
+    <node x="622.0" y="1490.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseOfficeActs</node>
+    <node x="1648.344836400817" y="604.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.ClientUserMapping</node>
+    <node x="472.4647239263793" y="-102.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Roles</node>
+    <node x="1523.2147239263793" y="249.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipantTypes</node>
+    <node x="655.2147239263793" y="975.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseVerdicts</node>
+    <node x="-44.0" y="532.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Citizens</node>
+    <node x="5343.667689161553" y="951.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Solicitations</node>
+    <node x="55.09483640081726" y="975.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Representatives</node>
+    <node x="-293.0" y="628.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.RolePermission</node>
+    <node x="3626.4647239263795" y="213.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Attributes</node>
+    <node x="3038.8397239263795" y="604.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases</node>
+    <node x="2141.3448364008173" y="616.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AttributeUser</node>
+    <node x="-24.28527607362048" y="1254.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.SolicitationPositions</node>
+    <node x="-9.0" y="1490.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.EvidenceRequirements</node>
+    <node x="2232.3397239263795" y="975.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.WItnesses</node>
+    <node x="2935.3397239263795" y="975.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseAnswers</node>
+    <node x="4079.3801124744377" y="1302.5">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessionParticipant</node>
+    <node x="3254.3397239263795" y="987.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.FirstInstanceCourtCaseDetails</node>
+    <node x="198.0" y="628.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.VerdictTypes</node>
+    <node x="3977.3397239263795" y="1011.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CassationCourtCaseDetails</node>
+    <node x="478.7499999999998" y="213.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Permissions</node>
+    <node x="694.4647239263793" y="628.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.UserPermission</node>
+    <node x="1190.5897239263793" y="927.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants</node>
+    <node x="3647.9647239263795" y="-78.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtTypes</node>
+    <node x="811.0897239263793" y="1254.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseRepresentatives</node>
+    <node x="753.0897239263793" y="-150.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Profiles</node>
+    <node x="-293.0" y="1490.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Producers</node>
+    <node x="2163.3397239263795" y="225.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseDecisionTypes</node>
+    <node x="2504.3397239263795" y="915.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseDecisions</node>
+    <node x="4606.3397239263795" y="951.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessions</node>
+    <node x="4335.3397239263795" y="951.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtExpenses</node>
+    <node x="1091.2147239263793" y="153.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users</node>
+    <node x="1904.3397239263795" y="975.5">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Expertises</node>
+    <node x="1883.2147239263795" y="201.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Clients</node>
+    <node x="3638.3397239263795" y="1011.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AppealCourtCaseDetails</node>
+    <node x="5105.886503067484" y="628.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Rooms</node>
+    <node x="943.4647239263793" y="616.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Companies</node>
+    <node x="1806.5897239263795" y="1278.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Translators</node>
+    <node x="1187.4647239263793" y="580.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.InvitationUsers</node>
+    <node x="3116.3397239263795" y="1242.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AppealAnswers</node>
+    <node x="5442.552147239263" y="616.0">8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.SolicitationTypes</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Translators" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" relationship="REFERENCES">
+      <point x="-76.25" y="-65.5" />
+      <point x="1882.8397239263795" y="1221.0" />
+      <point x="1356.0897239263793" y="1221.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Roles" relationship="REFERENCES">
+      <point x="-103.0" y="-137.5" />
+      <point x="1194.2147239263793" y="132.0" />
+      <point x="588.4647239263793" y="132.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AppealAnswers" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" relationship="REFERENCES">
+      <point x="-82.5" y="-101.5" />
+      <point x="3198.8397239263795" y="1221.0" />
+      <point x="1356.0897239263793" y="1221.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AppealCourtCaseDetails" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="0.0" y="-41.5" />
+      <point x="3797.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessions" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="147.75" y="-101.5" />
+      <point x="4951.0897239263795" y="863.0" />
+      <point x="5352.386503067484" y="863.0" />
+      <point x="5352.386503067484" y="460.0" />
+      <point x="1451.7147239263793" y="460.0" />
+      <point x="154.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseVerdicts" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="0.0" y="-77.5" />
+      <point x="794.7147239263793" y="863.0" />
+      <point x="683.9647239263793" y="863.0" />
+      <point x="683.9647239263793" y="490.0" />
+      <point x="2353.3397239263795" y="490.0" />
+      <point x="2353.3397239263795" y="450.0" />
+      <point x="1348.7147239263793" y="450.0" />
+      <point x="51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.UserPermission" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="57.25" y="-53.5" />
+      <point x="866.2147239263793" y="500.0" />
+      <point x="1245.7147239263793" y="500.0" />
+      <point x="-51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-27.583333333333314" y="-125.5" />
+      <point x="1328.506390593046" y="863.0" />
+      <point x="1176.9647239263793" y="863.0" />
+      <point x="1176.9647239263793" y="500.0" />
+      <point x="1245.7147239263793" y="500.0" />
+      <point x="-51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessionParticipant" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" relationship="REFERENCES">
+      <point x="-76.25" y="-41.0" />
+      <point x="4155.630112474438" y="1221.0" />
+      <point x="1356.0897239263793" y="1221.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Representatives" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Citizens" relationship="REFERENCES">
+      <point x="-64.75" y="-77.5" />
+      <point x="119.84483640081726" y="893.0" />
+      <point x="67.0" y="893.0" />
+      <point x="0.0" y="149.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.InvitationUsers" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="0.0" y="-101.5" />
+      <point x="1314.4647239263793" y="500.0" />
+      <point x="1245.7147239263793" y="500.0" />
+      <point x="-51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.WItnesses" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="63.0" y="-77.5" />
+      <point x="2421.3397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseAnswers" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="0.0" y="-77.5" />
+      <point x="3074.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseRepresentatives" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" relationship="REFERENCES">
+      <point x="84.0" y="-89.5" />
+      <point x="1063.0897239263793" y="1221.0" />
+      <point x="1356.0897239263793" y="1221.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessions" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Rooms" relationship="REFERENCES">
+      <point x="49.25" y="-101.5" />
+      <point x="4852.5897239263795" y="853.0" />
+      <point x="5214.886503067484" y="853.0" />
+      <point x="0.0" y="53.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Rooms" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Attributes" relationship="REFERENCES">
+      <point x="0.0" y="-53.5" />
+      <point x="5214.886503067484" y="480.0" />
+      <point x="3760.9647239263795" y="480.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Companies" relationship="REFERENCES">
+      <point x="-82.74999999999997" y="-125.5" />
+      <point x="1273.3397239263793" y="883.0" />
+      <point x="1054.9647239263793" y="883.0" />
+      <point x="0.0" y="65.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.ClientUserMapping" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-78.75" y="-77.5" />
+      <point x="1727.094836400817" y="500.0" />
+      <point x="1245.7147239263793" y="500.0" />
+      <point x="-51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.ClientUserMapping" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Clients" relationship="REFERENCES">
+      <point x="78.75" y="-77.5" />
+      <point x="1884.5948364008173" y="480.0" />
+      <point x="1988.2147239263795" y="480.0" />
+      <point x="0.0" y="89.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseDecisions" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-102.5" y="-137.5" />
+      <point x="2606.8397239263795" y="863.0" />
+      <point x="2406.0948364008173" y="863.0" />
+      <point x="2406.0948364008173" y="490.0" />
+      <point x="2353.3397239263795" y="490.0" />
+      <point x="2353.3397239263795" y="450.0" />
+      <point x="1348.7147239263793" y="450.0" />
+      <point x="51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Representatives" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Companies" relationship="REFERENCES">
+      <point x="64.75" y="-77.5" />
+      <point x="249.34483640081726" y="883.0" />
+      <point x="1054.9647239263793" y="883.0" />
+      <point x="0.0" y="65.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Attributes" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtTypes" relationship="REFERENCES">
+      <point x="0.0" y="-77.5" />
+      <point x="-1.4210854715202004E-14" y="53.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Citizens" relationship="REFERENCES">
+      <point x="-137.91666666666663" y="-125.5" />
+      <point x="1218.1730572597126" y="893.0" />
+      <point x="67.0" y="893.0" />
+      <point x="0.0" y="149.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseDecisions" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="102.5" y="-137.5" />
+      <point x="2811.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseVerdicts" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="93.0" y="-77.5" />
+      <point x="887.7147239263793" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CassationCourtCaseDetails" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="0.0" y="-41.5" />
+      <point x="4146.3397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.FirstInstanceCourtCaseDetails" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="0.0" y="-65.5" />
+      <point x="3435.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AttributeUser" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-54.5" y="-65.5" />
+      <point x="2195.8448364008173" y="500.0" />
+      <point x="1245.7147239263793" y="500.0" />
+      <point x="-51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.SolicitationPositions" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" relationship="REFERENCES">
+      <point x="0.0" y="-89.5" />
+      <point x="128.21472392637952" y="1221.0" />
+      <point x="1356.0897239263793" y="1221.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Expertises" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="77.0" y="-77.0" />
+      <point x="2135.3397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AttributeUser" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Attributes" relationship="REFERENCES">
+      <point x="54.5" y="-65.5" />
+      <point x="2304.8448364008173" y="480.0" />
+      <point x="3760.9647239263795" y="480.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseDecisionTypes" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtTypes" relationship="REFERENCES">
+      <point x="0.0" y="-65.5" />
+      <point x="2323.8397239263795" y="132.0" />
+      <point x="3685.631390593046" y="132.0" />
+      <point x="-75.33333333333333" y="53.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.AppealAnswers" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="82.5" y="-101.5" />
+      <point x="3363.8397239263795" y="1211.0" />
+      <point x="3627.8397239263795" y="1211.0" />
+      <point x="3627.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Profiles" relationship="REFERENCES">
+      <point x="103.0" y="-137.5" />
+      <point x="1400.2147239263793" y="122.0" />
+      <point x="853.5897239263793" y="122.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseRepresentatives" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Citizens" relationship="REFERENCES">
+      <point x="-84.0" y="-89.5" />
+      <point x="895.0897239263793" y="1211.0" />
+      <point x="28.760480572596407" y="1211.0" />
+      <point x="28.760480572596407" y="893.0" />
+      <point x="67.0" y="893.0" />
+      <point x="0.0" y="149.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-144.33333333333337" y="-77.5" />
+      <point x="3111.006390593046" y="490.0" />
+      <point x="2353.3397239263795" y="490.0" />
+      <point x="2353.3397239263795" y="450.0" />
+      <point x="1348.7147239263793" y="450.0" />
+      <point x="51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Solicitations" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="-100.0" y="-101.5" />
+      <point x="5443.667689161553" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtExpenses" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="0.0" y="-101.5" />
+      <point x="4460.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.FirstInstanceCourtCaseDetails" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.FirstInstanceCourtCaseDetails" relationship="REFERENCES">
+      <point x="0.0" y="65.5" />
+      <point x="3435.8397239263795" y="1138.0" />
+      <point x="3234.3397239263795" y="1138.0" />
+      <point x="3234.3397239263795" y="1052.5" />
+      <point x="-181.5" y="-0.0" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.RolePermission" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Roles" relationship="REFERENCES">
+      <point x="-57.25" y="-53.5" />
+      <point x="-235.75" y="510.0" />
+      <point x="-153.2906441717796" y="510.0" />
+      <point x="-153.2906441717796" y="132.0" />
+      <point x="588.4647239263793" y="132.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipantTypes" relationship="REFERENCES">
+      <point x="82.75" y="-125.5" />
+      <point x="1438.8397239263793" y="863.0" />
+      <point x="1637.844836400817" y="863.0" />
+      <point x="1637.844836400817" y="480.0" />
+      <point x="1693.2147239263793" y="480.0" />
+      <point x="0.0" y="41.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseVerdicts" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.VerdictTypes" relationship="REFERENCES">
+      <point x="-93.0" y="-77.5" />
+      <point x="701.7147239263793" y="873.0" />
+      <point x="317.0" y="873.0" />
+      <point x="0.0" y="53.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtTypes" relationship="REFERENCES">
+      <point x="144.33333333333334" y="-77.5" />
+      <point x="3399.6730572597126" y="470.0" />
+      <point x="4255.131390593046" y="470.0" />
+      <point x="4255.131390593046" y="132.0" />
+      <point x="3836.2980572597126" y="132.0" />
+      <point x="75.33333333333331" y="53.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Expertises" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-77.0" y="-77.0" />
+      <point x="1981.3397239263795" y="863.0" />
+      <point x="1973.8448364008173" y="863.0" />
+      <point x="1973.8448364008173" y="490.0" />
+      <point x="2353.3397239263795" y="490.0" />
+      <point x="2353.3397239263795" y="450.0" />
+      <point x="1348.7147239263793" y="450.0" />
+      <point x="51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessionParticipant" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessions" relationship="REFERENCES">
+      <point x="76.25" y="-41.0" />
+      <point x="4308.130112474438" y="1221.0" />
+      <point x="4803.3397239263795" y="1221.0" />
+      <point x="0.0" y="101.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseSessions" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="-147.75" y="-101.5" />
+      <point x="4655.5897239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Citizens" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Profiles" relationship="REFERENCES">
+      <point x="-55.5" y="-149.5" />
+      <point x="11.5" y="500.0" />
+      <point x="112.5" y="500.0" />
+      <point x="112.5" y="122.0" />
+      <point x="853.5897239263793" y="122.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Companies" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="0.0" y="-65.5" />
+      <point x="1054.9647239263793" y="480.0" />
+      <point x="1142.7147239263793" y="480.0" />
+      <point x="-154.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.WItnesses" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="-63.0" y="-77.5" />
+      <point x="2295.3397239263795" y="863.0" />
+      <point x="2130.8448364008173" y="863.0" />
+      <point x="2130.8448364008173" y="490.0" />
+      <point x="2353.3397239263795" y="490.0" />
+      <point x="2353.3397239263795" y="450.0" />
+      <point x="1348.7147239263793" y="450.0" />
+      <point x="51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.UserPermission" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Permissions" relationship="REFERENCES">
+      <point x="-57.25" y="-53.5" />
+      <point x="751.7147239263793" y="510.0" />
+      <point x="618.7499999999998" y="510.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Citizens" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Users" relationship="REFERENCES">
+      <point x="55.5" y="-149.5" />
+      <point x="122.5" y="500.0" />
+      <point x="1245.7147239263793" y="500.0" />
+      <point x="-51.5" y="137.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Solicitations" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.SolicitationTypes" relationship="REFERENCES">
+      <point x="100.0" y="-101.5" />
+      <point x="5643.667689161553" y="893.0" />
+      <point x="5576.552147239263" y="893.0" />
+      <point x="0.0" y="65.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.RolePermission" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Permissions" relationship="REFERENCES">
+      <point x="57.25" y="-53.5" />
+      <point x="-121.25" y="510.0" />
+      <point x="618.7499999999998" y="510.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipantTypes" relationship="REFERENCES">
+      <point x="-2.8421709430404007E-14" y="-77.5" />
+      <point x="3255.3397239263795" y="470.0" />
+      <point x="1806.5480572597126" y="470.0" />
+      <point x="113.33333333333331" y="41.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCaseParticipants" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="137.91666666666666" y="-125.5" />
+      <point x="1494.006390593046" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+    <edge source="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.Translators" target="8751412d-df8f-4826-9b2b-1e302b4e423d.TABLE:auth.CourtCases" relationship="REFERENCES">
+      <point x="76.25" y="-65.5" />
+      <point x="2035.3397239263795" y="1211.0" />
+      <point x="2924.8397239263795" y="1211.0" />
+      <point x="2924.8397239263795" y="873.0" />
+      <point x="3255.3397239263795" y="873.0" />
+      <point x="0.0" y="77.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.3698200429255407" showDependencies="false" x="2725.5" y="771.4999999999999" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

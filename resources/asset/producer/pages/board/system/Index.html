@@ -1,0 +1,159 @@
+<v-container fluid>
+    <v-card class="rounded-lg elevation-1" :loading="systemLoading">
+        <v-card-title class="accent">
+            <span class="grey--text">{{$tc('words.system', 1)}}</span>
+            <v-spacer />
+            <v-btn icon>
+                <v-icon v-text="'mdi-content-save-edit'" color="grey darken-3" @click="saveSystemData" />
+            </v-btn>
+        </v-card-title>
+        <v-divider />
+        <v-card-text>
+            <validation-observer ref="systemNameForm" v-slot="{ invalid }">
+                <form autocomplete="off">
+                    <v-row v-if="initialSystem">
+                        <v-col cols="12" sm="2">
+                            <validation-provider v-slot="{ errors }" name="systemLogo" rules="required|max:100">
+                                <div
+                                    style="overflow: hidden; height: 100px; width: 100px"
+                                    class="d-flex justify-center align-center elevation-1 rounded-circle"
+                                >
+                                    <v-img
+                                        aspect-ratio="0"
+                                        style="cursor: pointer"
+                                        :src="initialSystem.systemLogo ? initialSystem.systemLogo : lazyImage"
+                                        width="100"
+                                        height="100"
+                                        @click="$refs.photoInput.click()"
+                                    />
+                                </div>
+                                <input
+                                    ref="photoInput"
+                                    class="d-none"
+                                    type="file"
+                                    accept="image/*"
+                                    name="systemLogo"
+                                    @change="previewImage($event)"
+                                />
+                            </validation-provider>
+                        </v-col>
+                        <v-col cols="12" sm="4">
+                            <validation-provider v-slot="{ errors }" name="systemName" rules="required|max:100">
+                                <span class="ml-6">{{ $tc('users.first_name', 1) }}</span>
+                                <v-text-field
+                                    flat
+                                    rounded
+                                    v-model="initialSystem.systemName"
+                                    :value="initialSystem.systemName"
+                                    :counter="100"
+                                    :error-messages="errors"
+                                    placeholder="System Name"
+                                    name="systemName"
+                                    required
+                                    filled
+                                    clearable
+                                />
+                            </validation-provider>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <validation-provider v-slot="{ errors }" name="systemDomain" rules="required|max:100">
+                                <span class="ml-6">{{$tc('words.domain', 1)}}</span>
+                                <v-text-field
+                                    flat
+                                    rounded
+                                    v-model="initialSystem.systemDomain"
+                                    :value="initialSystem.systemDomain"
+                                    :counter="200"
+                                    :error-messages="errors"
+                                    placeholder="https://example.com"
+                                    name="systemDomain"
+                                    required
+                                    filled
+                                    clearable
+                                />
+                            </validation-provider>
+                        </v-col>
+                    </v-row>
+                </form>
+            </validation-observer>
+        </v-card-text>
+    </v-card>
+
+    <v-card class="mt-10 rounded-lg" :loading="clientLoading">
+        <v-card-title class="accent">
+            <span class="grey--text">Clients</span>
+            <v-spacer />
+            <v-btn icon @click="showClientDialog = true">
+                <v-icon v-text="'mdi-plus'" color="grey darken-3" />
+            </v-btn>
+        </v-card-title>
+        <v-divider />
+        <v-card-text :style="{ height: window.height + 'px' }" style="overflow: auto">
+            <v-simple-table fixed-header>
+                <template v-slot:default>
+                    <thead>
+                        <tr>
+                            <th id="clientNumber" class="text-left"> NO</th>
+                            <th id="clientName" class="text-left"> Name</th>
+                            <th id="clientProvider" class="text-left"> Provider</th>
+                            <th id="clientRedirect" class="text-left"> Redirect</th>
+                            <th id="clientType" class="text-left"> Secret</th>
+                            <th id="clientType" class="text-left"> Type</th>
+                            <th id="clientRevoked" class="text-left"> Active</th>
+                            <th id="createdAt" class="text-left"> CreatedAt</th>
+                            <th id="delete" class="text-left"> Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="client in initialClients" :key="client.clientId">
+                            <td>{{ client.clientId }}</td>
+                            <td>{{ client.clientName }}</td>
+                            <td>{{ client.clientProvider }}</td>
+                            <td>{{ client.clientRedirectUrl }}</td>
+                            <td>
+                                <div v-if="client.clientSecret">
+                                    <input :type="secretInputType" :value="client.clientSecret" />
+                                    <v-btn icon @click="copySecret(client.clientId)">
+                                        <v-icon v-text="'mdi-content-copy'" />
+                                    </v-btn>
+                                    <v-btn icon @click="toggleShowClientSecret">
+                                        <v-icon v-text="toggleClientSecretIcon()" />
+                                    </v-btn>
+                                </div>
+                            </td>
+                            <td>{{ client.clientType }}</td>
+                            <td>
+                                <v-icon
+                                    v-text="client.clientRevoked ? 'md-close' : 'mdi-check'"
+                                    :color="client.clientRevoked ? 'red' : 'green'"
+                                />
+                            </td>
+                            <td>{{ client.createdAt | formatData }}</td>
+                            <td>
+                                <v-btn icon @click="(deleteData = client.clientId), (deleteDialog = true)">
+                                    <v-icon v-text="'mdi-delete-outline'" color="red darken" />
+                                </v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-card-text>
+    </v-card>
+
+    <v-dialog v-model="deleteDialog" v-if="deleteDialog" max-width="400" width="100%" persistent>
+        <ApproveDialog v-model="deleteDialog" @update:value="deleteClient($event)" />
+    </v-dialog>
+
+    <v-dialog
+        v-model="showClientDialog"
+        v-if="showClientDialog"
+        max-width="600"
+        width="100%"
+        no-click-animation
+        persistent
+        class="rounded-lg"
+    >
+        <ClientCreateDialog v-model="showClientDialog" @update:value="showClientDialog = $event" />
+    </v-dialog>
+</v-container>

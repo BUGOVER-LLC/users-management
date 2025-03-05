@@ -1,0 +1,100 @@
+{
+    "app": {
+        "branches": "Branches",
+        "subtypes": "Case|Cases",
+        "title": "App"
+    },
+    "auth": {
+        "accept_code_accept": "Enter email the code sent to the mail (within 15 minutes).",
+        "create_system": "Create System",
+        "go": "Go",
+        "login_description": "ADMINISTRATIVE SYSTEM OF THE COURTS",
+        "or_create_new": "Or create new",
+        "password_set": "Password Set (or confirm)",
+        "repeat_password": "Repeat new password",
+        "resend_code": "Resend code",
+        "select_system": "Select System",
+        "send_code": "Send Code"
+    },
+    "menu": {
+        "app": "App",
+        "attribute": "Court|Courts",
+        "permissions": "Permissions",
+        "roles": "Roles",
+        "users": "Users"
+    },
+    "permissions": {
+        "doesnt": "Permissions doesnt exists !",
+        "new": "New permission",
+        "select_all": "Select all"
+    },
+    "roles": {
+        "belongs": {
+            "building": "Attached on court",
+            "judge": "Attached on judge"
+        },
+        "doesntExists": "Roles doesnt exists !",
+        "judge": "Judge",
+        "new": "New role",
+        "role_description": "Role description",
+        "role_name": "Role name",
+        "role_value": "Role value",
+        "subordinates": "Has subordinate | Has subordinates"
+    },
+    "room": {
+        "create": "Create room",
+        "description": "Room description",
+        "name": "Room name",
+        "value": "Room value"
+    },
+    "users": {
+        "check_psn": "Check by PSN",
+        "create_user": "Create user",
+        "date_birth": "Date birth",
+        "doesnt": "Users doesnt exists !",
+        "edit_user": "Edit user",
+        "first_name": "First name",
+        "invite_email": "Invite email",
+        "is_active": "Is active",
+        "last_name": "Last name",
+        "new": "New user",
+        "patronymic": "Patronymic",
+        "send_invite": "Send invite"
+    },
+    "words": {
+        "accepted": "Accepted",
+        "active": "Is Active",
+        "available": "Available|Available",
+        "change_password": "Change password",
+        "create": "Create",
+        "createdAt": "createdAt",
+        "delete": "Delete",
+        "description": "Description",
+        "disagree": "Disagree",
+        "domain": "Domain",
+        "edit": "Edit",
+        "email": "Email",
+        "environment": "Environment",
+        "invitations": "Invitation|Invitations",
+        "key": "Key",
+        "login": "Login",
+        "logo": "Logo",
+        "logout": "Logout",
+        "new_password": "New Password",
+        "next": "Next",
+        "old_password": "Old password",
+        "options": "Options",
+        "password": "Password",
+        "password_confirm": "Password confirmation does not match",
+        "psn": "PSN",
+        "room": "Room|Rooms",
+        "save": "Save",
+        "search": "Search",
+        "selected": "Selected|Selected",
+        "send": "Send",
+        "sent": "Sent",
+        "system": "System",
+        "username": "Username",
+        "users": "Users"
+    }
+}

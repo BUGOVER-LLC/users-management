@@ -1,0 +1,16 @@
+meta {
+  name: NID
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{auth_url}}/citizen/nid/callback?state=gggg&code=dddd
+  body: none
+  auth: none
+}
+
+query {
+  state: gggg
+  code: dddd
+}

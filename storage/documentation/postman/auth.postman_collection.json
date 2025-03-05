@@ -1,0 +1,263 @@
+{
+  "info": {
+    "_postman_id": "426ed29e-933c-42db-8511-1c6b11f96993",
+    "name": "auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "4133945",
+    "_collection_link": "https://speeding-equinox-90381.postman.co/workspace/court~23a4f32c-3669-498e-bfb1-c13a30d1a88b/collection/4133945-426ed29e-933c-42db-8511-1c6b11f96993?action=share&source=collection_link&creator=4133945"
+  },
+  "item": [
+    {
+      "name": "acceptInvite",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "dddewfewfeffew@mail.com",
+              "type": "text"
+            },
+            {
+              "key": "token",
+              "value": "ZIKihTw2wcnB0WsA6oWHEu8Z9FbywtRwW25VYU9J1p6mrAGIHqB3FOyKpHto0O44vo3LlqOqlwm9fuibwy1VI15AkBMcN4zQiVYPqxJwi8ZpO26EIpSoodoeKTlMXujs",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "secret",
+              "type": "text"
+            },
+            {
+              "key": "secret",
+              "value": "c5cZfy7rNsvK76Uwrre3NtsnD93FUNx6Mcn5ym7v",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{auth}}umaa/invite/accept",
+          "host": [
+            "{{auth}}umaa"
+          ],
+          "path": [
+            "invite",
+            "accept"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "nidLogin",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{auth}}nid/login",
+          "host": [
+            "{{auth}}nid"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "nidCallback",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "{{auth}}nid/callback?code=43542223&state=ffefewefwfewd",
+          "host": [
+            "{{auth}}nid"
+          ],
+          "path": [
+            "callback"
+          ],
+          "query": [
+            {
+              "key": "code",
+              "value": "43542223"
+            },
+            {
+              "key": "state",
+              "value": "ffefewefwfewd"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{auth}}login",
+          "host": [
+            "{{auth}}login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "passwordChange",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"code\": \"111111\",\n    \"password\": \"12345678\",\n    \"confirmPassword\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{auth}}password/change",
+          "host": [
+            "{{auth}}password"
+          ],
+          "path": [
+            "change"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "editUserProfile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "AuthorizationId",
+            "value": "5678cae6-f79a-4145-a11f-b9b1d7e97210",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "{{auth}}edit-info/{userId}",
+          "host": [
+            "{{auth}}edit-info"
+          ],
+          "path": [
+            "{userId}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "passwordChange",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{auth}}password/change",
+          "host": [
+            "{{auth}}password"
+          ],
+          "path": [
+            "change"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

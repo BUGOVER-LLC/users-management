@@ -1,0 +1,171 @@
+<v-container fluid>
+    <v-data-table
+        v-if="paginate"
+        hide-default-footer
+        dense
+        loading
+        loader-height="2"
+        calculate-widths
+        item-key="userId"
+        class="elevation-1"
+        :height="window.height"
+        :headers="header"
+        :loading="loader"
+        :items="payload"
+        :items-per-page="Number(paginate.per_page)"
+        @click:row="markEdited"
+    >
+        <template #no-data>
+            <div class="justify-center align-center text-center">
+                <h1 class="font-weight-medium mt-10">{{ trans('users.doesnt') }}</h1>
+            </div>
+        </template>
+
+        <template #top>
+            <div ref="toolbar">
+                <v-toolbar color="white" flat height="60px">
+                    <v-row>
+                        <div style="display: flex; align-items: center; justify-content: end; flex: 1">
+                            <div style="width: clamp(200px, 100%, 450px)" class="ml-2">
+                                <v-text-field
+                                    hide-details
+                                    outlined
+                                    dense
+                                    clearable
+                                    class="d-flex justify-end align-end"
+                                    :label="trans('words.search')"
+                                    prepend-inner-icon="mdi-search-web"
+                                    v-model="userPaginateModel.search"
+                                    @change="searchUserTrigger()"
+                                    @click:clear="searchUserTrigger()"
+                                />
+                            </div>
+                        </div>
+
+                        <v-divider vertical class="mr-1 ml-4 mb-1 mt-1" />
+
+                        <v-col cols="3">
+                            <v-select
+                                dense
+                                class="mt-0 mb-0"
+                                hide-details
+                                outlined
+                                :label="trans('menu.roles', 2)"
+                                single-line
+                                flat
+                                :items="roles"
+                                item-text="roleName"
+                                item-value="roleId"
+                                multiple
+                                v-model="userPaginateModel.roles"
+                                @change="searchUserTrigger"
+                                clearable
+                                @click:clear="(userPaginateModel.roles = []), searchUserTrigger"
+                            >
+                                <template #selection="{ item, index }">
+                                    <v-chip v-if="1 > index" small>
+                                        <span>{{ item.roleName }}</span>
+                                    </v-chip>
+                                    ...
+                                </template>
+                            </v-select>
+                        </v-col>
+
+                        <v-divider vertical class="mr-2 ml-2 mb-1 mt-1" />
+
+                        <v-radio-group hide-details dense row class="mt-5" v-model="userPaginateModel.person">
+                            <v-radio :label="trans('words.users', 2)" value="users" color="blue" />
+                            <v-radio
+                                :label="trans('words.invitations', 2)"
+                                value="invitations"
+                                color="grey lighten-1"
+                            />
+                        </v-radio-group>
+
+                        <v-divider vertical class="mr-2 mb-1 mt-1" />
+
+                        <v-switch
+                            :disabled="disableActive"
+                            :label="trans('words.active')"
+                            class="mt-5 mr-5"
+                            hide-details
+                            v-model="userPaginateModel.active"
+                        />
+
+                        <v-divider vertical class="mb-1 mt-1 mr-2" />
+
+                        <v-btn @click="createDialog = true" color="primary" class="mt-3 mr-1 rounded-lg" text large>
+                            <v-icon v-text="'mdi-plus'" />
+                            <span>{{ $t('users.new') }}</span>
+                        </v-btn>
+                        <ValidationProvider
+                            v-slot="{ errors, validate }"
+                            :rules="{ required: true, mimes: ['application/xlsx', 'application/csv'] }"
+                        >
+                            <v-file-input
+                                v-slot="{ errors, valid }"
+                                @change="validate"
+                                class="mt-4"
+                                hide-input
+                                prepend-icon="mdi-upload-multiple-outline"
+                            />
+                        </ValidationProvider>
+                    </v-row>
+                </v-toolbar>
+            </div>
+        </template>
+
+        <template #item.user.active="{ item }">
+            <v-icon v-if="item.user.active" v-text="'mdi-check'" color="green darken-1" />
+            <v-icon v-else v-text="'mdi-check'" color="gray lighten-1" />
+        </template>
+
+        <template #item.options="{ item }">
+            <v-btn icon @click="deleteUserDialog(item.user)">
+                <v-icon color="grey darken-3" v-text="'mdi-delete-outline'" />
+            </v-btn>
+        </template>
+
+        <template #item.edit="{ item }">
+            <v-btn icon @click="userInvitationsDialog(item)">
+                <v-icon color="grey darken-3" v-text="'mdi-account-plus-outline'" />
+            </v-btn>
+
+            <v-btn icon @click="editUserDialog(item.user)">
+                <v-icon color="grey darken-3" v-text="'mdi-book-edit-outline'" />
+            </v-btn>
+
+            <v-btn icon @click="deleteUserDialog(item.user)">
+                <v-icon color="grey lighten" v-text="'mdi-delete-outline'" />
+            </v-btn>
+        </template>
+
+        <template #footer>
+            <TableFooter :paginated="paginate" @changeData="queryPaginate" />
+        </template>
+    </v-data-table>
+
+    <v-dialog v-if="createDialog" v-model="createDialog" max-width="700px" width="100%" no-click-animation persistent>
+        <CreateUserDialog v-model="createDialog" @update:value="(dialogData = null), (createDialog = $event)" />
+    </v-dialog>
+
+    <v-dialog v-if="editDialog" v-model="editDialog" max-width="700" width="100%" no-click-animation persistent>
+        <EditUserDialog
+            v-model="editDialog"
+            @update:value="(dialogData = null), (editDialog = $event)"
+            :user="dialogData"
+        />
+    </v-dialog>
+
+    <v-dialog v-if="deleteDialog" v-model="deleteDialog" width="400">
+        <ApproveDialog
+            v-model="deleteDialog"
+            :title="$t('words.delete') + ' ' + trans('menu.users', 1)"
+            @update:value="userDeleteDialogTrigger($event)"
+        />
+    </v-dialog>
+
+    <v-dialog v-if="invitationsDialog" v-model="invitationsDialog" max-width="630" width="100%" no-click-animation>
+        <InvitationsDialog @closeDialog="invitationsDialog = $event" :user="dialogData" />
+    </v-dialog>
+</v-container>

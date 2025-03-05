@@ -1,0 +1,85 @@
+<v-container fluid>
+    <v-data-table
+        v-if="permissions"
+        v-model="permissionTableModel"
+        :items="payload"
+        :headers="headers"
+        :fixed-header="true"
+        :items-per-page="Number(permissions.per_page)"
+        :height="window.height"
+        selectable-key="permissionId"
+        loader-height="1"
+        hide-default-footer
+        item-key="permissionId"
+        class="elevation-1"
+        :loading="loader"
+        @click:row="markEdited"
+    >
+        <template #no-data>
+            <div class="justify-center align-center text-center">
+                <h1 class="font-weight-medium mt-10">{{ $t('permissions.doesnt') }}</h1>
+            </div>
+        </template>
+
+        <template #top>
+            <div ref="toolbar">
+                <v-toolbar color="white" flat height="55px">
+                    <v-row>
+                        <v-spacer />
+                        <v-btn
+                            depressed
+                            text
+                            @click="(dialogData = {}), (permissionDialog = true)"
+                            color="primary"
+                            tile
+                            class="rounded-lg mr-1"
+                        >
+                            <v-icon v-text="'mdi-plus'" />
+                            <span> {{ $tc('permissions.new', 1) }} </span>
+                        </v-btn>
+                    </v-row>
+                </v-toolbar>
+            </div>
+        </template>
+
+        <template #item.options="{ item }">
+            <v-btn icon @click="clickSelectEdit(item)"
+                ><v-icon v-text="'mdi-tag-edit-outline'" color="grey darken-3"
+            /></v-btn>
+            <v-btn icon @click="clickSelectDelete(item)">
+                <v-icon v-text="'mdi-delete-outline'" color="red darken-3" />
+            </v-btn>
+        </template>
+
+        <template #item.permissionActive="{ item }">
+            <v-icon v-if="item.permissionActive" v-text="'mdi-check'" color="green darken-1" />
+            <v-icon v-else v-text="'mdi-check'" color="gray lighten-1" />
+        </template>
+
+        <template #footer>
+            <TableFooter :paginated="permissions" @changeData="queryPaginate" />
+        </template>
+    </v-data-table>
+
+    <v-dialog
+        v-model="permissionDialog"
+        v-if="permissionDialog"
+        persistent
+        no-click-animation
+        max-width="600"
+        width="100%"
+    >
+        <FormPermissionDialog
+            @closeDialog="(permissionDialog = false), selectedRow.select(false)"
+            :permission-data-prop.sync="dialogData"
+        />
+    </v-dialog>
+
+    <v-dialog v-model="deleteDialog" v-if="deleteDialog" max-width="400" width="100%">
+        <ApproveDialog
+            v-model="deleteDialog"
+            :title="$t('words.delete') +' '+ $tc('menu.permissions', 1)"
+            @update:value="permissionDeleteDialogTrigger($event)"
+        />
+    </v-dialog>
+</v-container>

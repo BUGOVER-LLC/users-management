@@ -1,0 +1,64 @@
+---
+ip: 192.168.56.67
+memory: 2048
+cpus: 1
+provider: virtualbox
+authorize: ~/.ssh/id_rsa.pub
+keys:
+  - ~/.ssh/id_rsa
+
+folders:
+  - map: /home/user/projects/court
+    to: /home/vagrant/court
+
+  - map: /home/user/projects/court/.etc/phpmyadmin
+    to: /home/vagrant/phpmyadmin
+
+sites:
+  - map: court-auth.loc
+    to: /home/vagrant/court/public
+
+  - map: court-auth.phpmyadmin.loc
+    to: /home/vagrant/phpmyadmin
+
+databases:
+  - auth
+  - auth_test
+
+features:
+  - mysql:
+      version: 8.4
+  - postgresql: false
+  - golang: false
+  - minio: true
+  - python: true
+  - trader: true
+  - webdriver: true
+  - docker: false
+  - php5.6: false
+  - php7.0: false
+  - php7.1: false
+  - php7.2: false
+  - php7.3: false
+  - php7.4: false
+  - php8.0: false
+  - php8.1: false
+  - php8.2: true
+  - php8.3: true
+
+services:
+  - enabled:
+      - "mysql"
+      - "minio"
+
+buckets:
+  - name: local
+    policy: public
+  - name: shared
+    policy: public
+  - name: signed
+    policy: public
+
+name: court-auth
+hostname: court-auth.loc
+hosts_file_additions: true

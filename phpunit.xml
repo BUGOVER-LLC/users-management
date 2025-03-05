@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         cacheResultFile="tests/.cache/phpunit.cache"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         beStrictAboutCoversAnnotation="true"
+         forceCoversAnnotation="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         verbose="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>./tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>./tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./infrastructure</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">./vendor</directory>
+            <directory suffix=".php">./config</directory>
+        </exclude>
+        <report>
+            <!--            <clover outputFile="tests/.report/phpunit/clover.xml"/>-->
+            <!--            <html outputDirectory="tests/.report/phpunit/html"/>-->
+            <!--            <php outputFile="tests/.report/coverage.serialized"/>-->
+            <!--            <xml outputDirectory="tests/.report/xml-coverage"/>-->
+            <!--            <text outputFile="php://stdout"/>-->
+        </report>
+    </coverage>
+
+    <logging>
+        <!--        <testdoxHtml outputFile="tests/.report/testdox.html"/>-->
+        <!--        <testdoxText outputFile="tests/.report/testdox.txt"/>-->
+    </logging>
+
+    <php>
+        <ini name="memory_limit" value="1024M"/>
+        <env name="XDEBUG_MODE" value="coverage"/>
+
+        <server name="app.baseURL" value="https://court-auth.loc/"/>
+        <env name="database.tests.strictOn" value="true"/>
+        <const name="HOMEPATH" value="./"/>
+        <const name="CONFIGPATH" value="./config/"/>
+        <const name="PUBLICPATH" value="./public/"/>
+        <env name="COMPOSER_DISABLE_XDEBUG_WARN" value="1"/>
+
+        <server name="APP_ENV" value="testing"/>
+        <server name="BCRYPT_ROUNDS" value="4"/>
+        <server name="CACHE_DRIVER" value="array"/>
+        <server name="DB_CONNECTION" value="mysql_testing"/>
+        <server name="DB_DATABASE" value="auth_test"/>
+        <server name="MAIL_MAILER" value="array"/>
+        <server name="QUEUE_CONNECTION" value="sync"/>
+        <server name="SESSION_DRIVER" value="array"/>
+        <server name="TELESCOPE_ENABLED" value="false"/>
+        <server name="DEBUGBAR_ENABLED" value="false"/>
+    </php>
+</phpunit>
