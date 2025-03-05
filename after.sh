@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # If you would like to do some extra provisioning you may
 # add any commands you wish to this file and they will
@@ -86,7 +86,7 @@ sudo apt autoclean -y
 # Project settings commands
 cd /home/vagrant/auth || exit
 
-composer install
+composer install --ignore-platform-reqs
 
 php artisan migrate
 php artisan optimize:clear
